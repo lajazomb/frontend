@@ -1,38 +1,182 @@
-.App {
-  text-align: center;
+body {
+  margin:0;
+  background-color: #E4BE9E;
+  font-family: Futura;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.content {
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.searchbar {
+  padding: 5px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 0.5px solid;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Landing Page */
+.landing-page-content {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+.landing-page-slider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  height: 300px;
+  width: 100vw;
+}
+
+.landing-page-quote-container {
+  width: 60%;
+}
+
+.landing-page-quotes {
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.explore-button {
+  width: 19.7vw;
+  padding: 13px;
+  margin-top: 30px;
+  background-color: black;
+  border: none;
+  color: white;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+/* End Landing Page */
+
+/* Login Form TODO: potentially migrate to seperate stylesheet and create mobile breakpoints!*/
+
+.login-form {
+  padding: 20px;
+  width: 20vw;
+  align-items: center;
+  justify-content: center;
 }
+
+.form-field {
+  width: 18vw;
+  padding: 10px 10px 10px 0px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 0.5px solid;
+}
+
+
+.submit-button {
+  width: 19.7vw;
+  padding: 13px;
+  margin-top: 10px;
+  background-color: #313638;
+  border: none;
+  color: white;
+}
+
+.submit-button:hover {
+  background-color: #5DD9C1;
+  color: white;
+}
+
+.login-form-container {
+  background-color:white;
+}
+
+/* End Login Form */
+
+/* Cart */
+
+.cart-container {
+  min-width: 300px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.cart-item {
+
+}
+
+.name-quantity {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content:space-between;
+}
+
+.cart-total-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.cart-buttons-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.cart-button-shopping {
+  padding: 7px;
+  width: 50%;
+  border: 1px solid #88292f;
+  color: #88292f;
+}
+
+.cart-button-checkout {
+  padding: 7px;
+  width: 45%;
+  border: none;
+  background-color: #2CDA9D;
+}
+/* End Cart */
+
+/* Product Page */
+
+.product-page-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-page-row {
+  margin-top: 50px;
+  display: flex;
+  width: 95vw;
+  justify-content: space-between;
+}
+
+.product-container {
+  min-width: 250px;
+  padding: 10px;
+  background-color: white;
+  flex-direction: column;
+}
+
+.product-image-container {
+  width: 100%;
+  height: 200px;
+  background-color: black;
+}
+
+
+/* End Prodduct Page */
+
+
+
+
