@@ -1,6 +1,7 @@
 import React from "react";
 import {Nav, NavLink, NavMenu} from "./NavigationBarElements";
 import { BsFillCartFill } from "react-icons/bs";
+import SearchBar from '../elements/searchBar'
 
 const NavigationBar = () => {
     return (
@@ -17,7 +18,7 @@ const NavigationBar = () => {
                 <NavLink to="/signup">
                     Sign Up
                 </NavLink>
-                <input type="text" className="searchbar" placeholder="Search.."/>
+                <SearchBar/>
                 <NavLink to="/cart">
                     <BsFillCartFill/>
                 </NavLink>
