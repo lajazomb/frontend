@@ -4,28 +4,35 @@ import { BsFillCartFill } from "react-icons/bs";
 import SearchBar from '../elements/searchBar'
 
 const NavigationBar = () => {
+    let activeStyle = {
+        textDecoration: "none",
+        color: "black"
+    };
+
     return (
-        <>
+        <div className="navigation-menu">
         <Nav>
-            <h1>BOOKSTORE</h1>
+            <NavLink to="/" style={activeStyle}>
+                <h1 id="homeLink">BOOKSTORE</h1>
+            </NavLink>
             <NavMenu>
-                <NavLink to="/products" activeStyle>
+                <NavLink to="/products" style={activeStyle}>
                     Products
                 </NavLink>
-                <NavLink to="/login" activeStyle>
+                <NavLink to="/login" style={activeStyle}>
                     Login
                 </NavLink>
-                <NavLink to="/signup">
+                <NavLink to="/signup" style={activeStyle}>
                     Sign Up
                 </NavLink>
                 <SearchBar/>
-                <NavLink to="/cart">
+                <NavLink to="/cart" style={activeStyle}>
                     <BsFillCartFill/>
                 </NavLink>
             </NavMenu>
 
         </Nav>
-        </>
+        </div>
     );
 };
 
