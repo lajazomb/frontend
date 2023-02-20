@@ -1,6 +1,24 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Cart = () => {
+    const createCheckoutSession = () => {
+        const paymentBackend = process.env.REACT_APP_BACKEND_PAYMENT_API;
+            fetch(paymentBackend + "create-checkout-session", {
+                method: "POST",
+                body: JSON.stringify({})
+            }).then(res => {
+                if (res.ok) return res.json()
+                return res.json().then(json => Promise.reject(json))
+            })
+                .then(({url}) => {
+                    window.location = url
+                })
+                .catch(e => {
+                    console.error(e)
+                })
+    }
+
     return (
         <div className="content">
             <div className="cart-container">
@@ -53,8 +71,10 @@ const Cart = () => {
                 </div>
 
                 <div className="cart-buttons-container">
-                    <button className="cart-button-shopping">Continue Shopping</button>
-                    <button className="cart-button-checkout">Checkout</button>
+                    <Link to="/">
+                        <button className="cart-button-shopping">Continue Shopping</button>
+                    </Link>
+                    <button className="cart-button-checkout" onClick={createCheckoutSession}>Checkout</button>
                 </div>
             </div>
         </div>

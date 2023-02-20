@@ -130,16 +130,43 @@ body {
   justify-content: space-between;
 }
 
+button {
+  display: inline-block;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: #007bff;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: #0062cc;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+button:focus {
+  outline: none;
+}
+
+button:active {
+  transform: translateY(1px);
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
 .cart-button-shopping {
-  padding: 7px;
-  width: 50%;
-  border: 1px solid #88292f;
-  color: #88292f;
+  width: 75%;
+  background-color: black;
 }
 
 .cart-button-checkout {
-  padding: 7px;
-  width: 45%;
+  width: 50%;
   border: none;
   background-color: #2CDA9D;
 }

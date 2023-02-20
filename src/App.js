@@ -8,7 +8,6 @@ import Signup from './pages/signup';
 import Products from './pages/products';
 
 
-
 function App() {
   return (
       <Router>
