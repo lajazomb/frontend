@@ -1,7 +1,10 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
+import jwtDecode from "jwt-decode";
 
 const Cart = () => {
+    let [loggedIn, setLogin] = useState(false);
+
     const createCheckoutSession = () => {
         const paymentBackend = process.env.REACT_APP_BACKEND_PAYMENT_API;
             fetch(paymentBackend + "create-checkout-session", {
@@ -18,6 +21,27 @@ const Cart = () => {
                     console.error(e)
                 })
     }
+
+    const checkLoginStatus = () => {
+        if (localStorage.getItem("jwt-token") === null) {
+            loggedIn = false;
+            window.location.replace("http://localhost:3000/login");
+        } else {
+            const token = localStorage.getItem("jwt-token");
+            var decodedToken = jwtDecode(token)
+            var dateNow = new Date();
+
+            if (decodedToken.exp * 1000 < dateNow.getTime()) {
+                localStorage.removeItem("jwt-token")
+            } else {
+                loggedIn = true;
+            }
+        }
+    }
+
+    useEffect(() => {
+        checkLoginStatus()
+    });
 
     return (
         <div className="content">
