@@ -4,10 +4,39 @@ import jwtDecode from "jwt-decode";
 
 
 const Login = () => {
-    const [email, setEmail] = useState("");
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState("");
     let [loggedIn, setLogin] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
+    const [formValid, setFormValid] = useState(false);
+
+    const checkEmail = (event) => {
+        const email = event.target.value;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            setErrorMessage("Please enter a valid email address");
+        } else {
+            setErrorMessage("");
+        }
+        console.log(email)
+    }
+
+
+    const checkForm = () => {
+
+        if (email === '') {
+            setErrorMessage("Please enter an email address");
+            setFormValid(false);
+        } else if (password === '') {
+            setErrorMessage("Please enter a password");
+            setFormValid(false);
+        } else {
+            setErrorMessage("");
+            setFormValid(true);
+        }
+    }
+
+
 
 
     const handleSubmit = async (event) => {
@@ -72,7 +101,11 @@ const Login = () => {
                                 className="form-field"
                                 placeholder="Enter your Email"
                                 value={email}
-                                onChange={(event) => setEmail(event.target.value)}
+                                onChange={(event) => {
+                                    setEmail(event.target.value);
+                                    checkEmail(event);
+                                }}
+                                onBlur={checkForm}
                             />
                         </div>
                         <label>Password</label>
@@ -83,10 +116,11 @@ const Login = () => {
                                 placeholder="Enter your Password"
                                 value={password}
                                 onChange={(event) => setPassword(event.target.value)}
+                                onBlur={checkForm}
                             />
                         </div>
                         <div className="form-field-container">
-                            <button type="submit" className="submit-button">
+                            <button type="submit" disabled={!formValid} className="submit-button">
                                 Sign in
                             </button>
                         </div>
