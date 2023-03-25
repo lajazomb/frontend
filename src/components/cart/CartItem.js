@@ -39,7 +39,7 @@ const CartItem = ({ productId, quantity, userId, updateTotal }) => {
                 throw new Error("HTTP error " + response.status);
             }
 
-            window.location.href = process.env.BASE_URL + "/cart";
+            window.location.href("/cart");
 
             // Update the total after the item is removed from the cart
             updateTotal(-(price * quantity));
