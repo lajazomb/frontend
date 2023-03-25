@@ -58,7 +58,7 @@ const NavigationBar = ({ loggedIn }) => {
                         <NavLink to="/cart" style={activeStyle}>
                             <BsFillCartFill />
                         </NavLink>
-                        <NavLink to="/" style={activeStyle}>
+                        <NavLink to="/profile" style={activeStyle}>
                             Profile
                         </NavLink>
                         <NavLink style={activeStyle} onClick={handleLogout}>

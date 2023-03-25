@@ -114,7 +114,11 @@ body {
 }
 
 .cart-item {
+  border-bottom: 0.5px solid black;
+}
 
+.red-text {
+  color: #de1818;
 }
 
 .name-quantity {
@@ -207,9 +211,12 @@ button:active {
   background-color: black;
 }
 
+.profile-form {
+  padding: 20px;
+  width: 20vw;
+  align-items: center;
+  justify-content: center;
+}
+
 
 /* End Product Page */
-
-
-
-

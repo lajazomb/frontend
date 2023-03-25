@@ -7,6 +7,7 @@ import Login from './pages/login';
 import Signup from './pages/signup';
 import Products from './pages/products';
 import jwtDecode from "jwt-decode";
+import Profile from "./pages/profile";
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           <Route path='/signup' element={<Signup/>} />
           <Route path='/login' element={<Login/>} />
           <Route path='/cart' element={<Cart/>} />
+          <Route path='/profile' element={<Profile/>} />
           <Route path='/products' element={<Products/>} />
         </Routes>
       </Router>
