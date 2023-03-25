@@ -8,6 +8,7 @@ const Cart = () => {
     const [userId, setUserId] = useState("");
     const [cartData, setCartData] = useState(null);
     const [itemPairs, setItemPairs] = useState([]);
+    const [total, setTotal] = useState(0);
 
     const createCheckoutSession = () => {
         const paymentBackend = process.env.REACT_APP_BACKEND_PAYMENT_API;
@@ -26,7 +27,13 @@ const Cart = () => {
             })
     }
 
+    const updateTotal = (price) => {
+        setTotal(prevTotal => prevTotal + price);
+    }
+
     const checkLoginStatus = async () => {
+        const baseurl = process.env.BASE_URL
+
         if (localStorage.getItem("jwt-token") === null) {
             setLogin(false);
             window.location.replace("http://localhost:3000/login");
@@ -47,10 +54,11 @@ const Cart = () => {
 
     const getCart = async () => {
         try {
+            const cartBackend = process.env.REACT_APP_BACKEND_CART_API;
             const token = localStorage.getItem("jwt-token");
             const decodedToken = jwtDecode(token);
             console.log("Getting cart for " + userId);
-            const response = await fetch("http://localhost:28080/cart/" + decodedToken.sub, {
+            const response = await fetch(cartBackend + "/cart/" + decodedToken.sub, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -84,10 +92,10 @@ const Cart = () => {
     return (
         <div className="content">
             <div className="cart-container">
-                {itemPairs.length > 0 && <CartContainer itemPairs={itemPairs} />}
+                {itemPairs.length > 0 && <CartContainer itemPairs={itemPairs} userId={userId} updateTotal={updateTotal}/>}
                 <div className="cart-total-container">
                     <h3>TOTAL</h3>
-                    <h3>59,97€</h3>
+                    <h3>{total/2}€</h3>
                 </div>
 
                 <div className="cart-buttons-container">
