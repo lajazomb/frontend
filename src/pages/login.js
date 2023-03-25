@@ -4,11 +4,15 @@ import jwtDecode from "jwt-decode";
 
 
 const Login = () => {
+    const userBackend = process.env.REACT_APP_BACKEND_USER_API;
+    const baseUrl = process.env.BASE_URL;
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState("");
     let [loggedIn, setLogin] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
     const [formValid, setFormValid] = useState(false);
+
 
     const checkEmail = (event) => {
         const email = event.target.value;
@@ -18,7 +22,6 @@ const Login = () => {
         } else {
             setErrorMessage("");
         }
-        console.log(email)
     }
 
 
@@ -36,13 +39,10 @@ const Login = () => {
         }
     }
 
-
-
-
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = { email, password };
-        const response = await fetch("http://localhost:28082/auth/authenticate", {
+        const response = await fetch(userBackend + "/auth/authenticate", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -58,7 +58,7 @@ const Login = () => {
             .then(data => {
                 const jwtToken = data.token; // Extract the "value" attribute from the JSON response
                 localStorage.setItem("jwt-token", jwtToken); // Save the token in local storage
-                window.location.href = "http://localhost:3000";
+                window.location.replace("http://localhost:3000/products");
             })
     };
 
@@ -74,7 +74,7 @@ const Login = () => {
                 localStorage.removeItem("jwt-token")
             } else {
                 loggedIn = true;
-                window.location.replace("http://localhost:3000/login");
+                window.location.replace("http://localhost:3000/products");
             }
         }
     }
@@ -82,7 +82,7 @@ const Login = () => {
     useEffect(() => {
         checkLoginStatus()
         if (loggedIn == true) {
-            window.location.href = "http://localhost:3000";
+            window.location.href = baseUrl;
         }
     });
 

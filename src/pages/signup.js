@@ -30,8 +30,9 @@ const Signup = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        const userBackend = process.env.REACT_APP_BACKEND_USER_API;
 
-        fetch('http://localhost:28082/auth/register', {
+        fetch(userBackend + '/auth/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -47,7 +48,7 @@ const Signup = () => {
             .then(data => {
                 const jwtToken = data.token; // Extract the "value" attribute from the JSON response
                 localStorage.setItem("jwt-token", jwtToken); // Save the token in local storage
-                window.location.href = "http://localhost:3000";
+                window.location.href = process.env.BASE_URL;
             })
             .catch(error => {
                 console.error('There was a problem with the form submission:', error);
