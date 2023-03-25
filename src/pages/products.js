@@ -1,133 +1,39 @@
-import React from "react";
+import React, {useEffect, useState, componentDidMount} from "react";
+import axios from 'axios';
+import ProductList from "../components/Products/ProductList";
 
-const Products = () => {
-    return (
-        <div className="product-page-content">
+export default class products extends React.Component {
+    state = {
+        products: [],
+        isLoading: false,
+        errorMsg: ''
+    };
 
-            <div className="product-page-row">
-                <div className="product-container">
-                    <div className="product-image-container">
-                        <img/>
-                    </div>
-                    <div className="product-description-container">
-                        <h4>Book Title</h4>
-                        <p>ISBN</p>
-                    </div>
-                </div>
-                <div className="product-container">
-                    <div className="product-image-container">
-                        <img/>
-                    </div>
-                    <div className="product-description-container">
-                        <h4>Book Title</h4>
-                        <p>ISBN</p>
-                    </div>
-                </div>
-                <div className="product-container">
-                    <div className="product-image-container">
-                        <img/>
-                    </div>
-                    <div className="product-description-container">
-                        <h4>Book Title</h4>
-                        <p>ISBN</p>
-                    </div>
-                </div>
+    componentDidMount() {
+        this.setState({ isLoading: true });
+        axios
+            .get('http://localhost:28081/products/')
+            .then((response) => {
+                this.setState({ products: response.data, errorMsg: '' });
+            })
+            .catch((error) =>
+                this.setState({
+                    errorMsg: 'Error while loading data. Try again later.'
+                })
+            )
+            .finally(() => {
+                this.setState({ isLoading: false });
+            });
+    }
 
-                <div className="product-container">
-                    <div className="product-image-container">
-                        <img/>
-                    </div>
-                    <div className="product-description-container">
-                        <h4>Book Title</h4>
-                        <p>ISBN</p>
-                    </div>
-                </div>
-
+    render() {
+        const { products, isLoading, errorMsg } = this.state;
+        return (
+            <div className="main-section">
+                {isLoading && <p className="loading">Loading...</p>}
+                {errorMsg && <p className="errorMsg">{errorMsg}</p>}
+                <ProductList products={products} />
             </div>
-
-            <div className="product-page-row">
-                <div className="product-container">
-                    <div className="product-image-container">
-                        <img/>
-                    </div>
-                    <div className="product-description-container">
-                        <h4>Book Title</h4>
-                        <p>ISBN</p>
-                    </div>
-                </div>
-                <div className="product-container">
-                    <div className="product-image-container">
-                        <img/>
-                    </div>
-                    <div className="product-description-container">
-                        <h4>Book Title</h4>
-                        <p>ISBN</p>
-                    </div>
-                </div>
-                <div className="product-container">
-                    <div className="product-image-container">
-                        <img/>
-                    </div>
-                    <div className="product-description-container">
-                        <h4>Book Title</h4>
-                        <p>ISBN</p>
-                    </div>
-                </div>
-
-                <div className="product-container">
-                    <div className="product-image-container">
-                        <img/>
-                    </div>
-                    <div className="product-description-container">
-                        <h4>Book Title</h4>
-                        <p>ISBN</p>
-                    </div>
-                </div>
-
-            </div>
-
-            <div className="product-page-row">
-                <div className="product-container">
-                    <div className="product-image-container">
-                        <img/>
-                    </div>
-                    <div className="product-description-container">
-                        <h4>Book Title</h4>
-                        <p>ISBN</p>
-                    </div>
-                </div>
-                <div className="product-container">
-                    <div className="product-image-container">
-                        <img/>
-                    </div>
-                    <div className="product-description-container">
-                        <h4>Book Title</h4>
-                        <p>ISBN</p>
-                    </div>
-                </div>
-                <div className="product-container">
-                    <div className="product-image-container">
-                        <img/>
-                    </div>
-                    <div className="product-description-container">
-                        <h4>Book Title</h4>
-                        <p>ISBN</p>
-                    </div>
-                </div>
-
-                <div className="product-container">
-                    <div className="product-image-container">
-                        <img/>
-                    </div>
-                    <div className="product-description-container">
-                        <h4>Book Title</h4>
-                        <p>ISBN</p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    );
-};
-
-export default Products;
+        );
+    }
+}
