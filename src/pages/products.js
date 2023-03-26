@@ -12,7 +12,7 @@ export default class products extends React.Component {
     componentDidMount() {
         this.setState({ isLoading: true });
         axios
-            .get('http://localhost:28081/products/')
+            .get('http://localhost:28081/api/v1/products')
             .then((response) => {
                 this.setState({ products: response.data, errorMsg: '' });
             })

@@ -32,8 +32,6 @@ const Cart = () => {
     }
 
     const checkLoginStatus = async () => {
-        const baseurl = process.env.BASE_URL
-
         if (localStorage.getItem("jwt-token") === null) {
             setLogin(false);
             window.location.replace("http://localhost:3000/login");
@@ -47,7 +45,7 @@ const Cart = () => {
                 setLogin(false); // Update login status
             } else {
                 setLogin(true); // Update login status
-                setUserId(decodedToken.sub);
+                setUserId(decodedToken.userid);
             }
         }
     };
@@ -58,7 +56,7 @@ const Cart = () => {
             const token = localStorage.getItem("jwt-token");
             const decodedToken = jwtDecode(token);
             console.log("Getting cart for " + userId);
-            const response = await fetch(cartBackend + "/cart/" + decodedToken.sub, {
+            const response = await fetch(cartBackend + "/api/v1/cart/user/" + decodedToken.userid, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -66,7 +64,7 @@ const Cart = () => {
             });
 
             if (!response.ok) {
-                console.log("Cart could not be retrieved");
+                console.log("Cart could not be loaded");
             }
 
             const cartData = await response.json();

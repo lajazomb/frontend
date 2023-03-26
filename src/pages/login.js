@@ -42,7 +42,7 @@ const Login = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = { email, password };
-        const response = await fetch(userBackend + "/auth/authenticate", {
+        const response = await fetch(userBackend + "/api/v1/auth/authenticate", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -82,7 +82,7 @@ const Login = () => {
     useEffect(() => {
         checkLoginStatus()
         if (loggedIn == true) {
-            window.location.href = baseUrl;
+            window.location.href = "http://localhost:3000/products";
         }
     });
 

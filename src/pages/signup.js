@@ -32,7 +32,7 @@ const Signup = () => {
         event.preventDefault();
         const userBackend = process.env.REACT_APP_BACKEND_USER_API;
 
-        fetch(userBackend + '/auth/register', {
+        fetch(userBackend + '/api/v1/auth/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

@@ -36,17 +36,21 @@ const Details = () => {
             return;
         }
 
-        const userId = decodedToken.sub;
+        const userId = decodedToken.userid;
         const data = { userId, productId: id, quantity };
         axios
-            .post('http://localhost:28080/cart', data)
+            .post('http://localhost:28080/api/v1/cart', data, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('jwt-token')}`,
+                },
+            })
             .catch((error) => setErrorMsg('Error: product could not be added to cart.'));
     };
 
     useEffect(() => {
         setIsLoading(true);
         axios
-            .get(`http://localhost:28081/products/${id}`)
+            .get(`http://localhost:28081/api/v1/products/${id}`)
             .then((response) => {
                 setProduct(response.data);
                 setErrorMsg('');

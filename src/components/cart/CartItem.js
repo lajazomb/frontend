@@ -9,7 +9,7 @@ const CartItem = ({ productId, quantity, userId, updateTotal }) => {
     const fetchProductData = async () => {
         try {
             const response = await fetch(
-                process.env.REACT_APP_BACKEND_PRODUCT_API + `/products/${productId}`
+                process.env.REACT_APP_BACKEND_PRODUCT_API + `/api/v1/products/${productId}`
             );
             if (!response.ok) {
                 throw new Error("HTTP error " + response.status);
@@ -27,7 +27,7 @@ const CartItem = ({ productId, quantity, userId, updateTotal }) => {
         const data = { userId, productId };
 
         try {
-            const response = await fetch(process.env.REACT_APP_BACKEND_CART_API + `/cart/delete`, {
+            const response = await fetch(process.env.REACT_APP_BACKEND_CART_API + `/api/v1/cart/delete`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -39,7 +39,7 @@ const CartItem = ({ productId, quantity, userId, updateTotal }) => {
                 throw new Error("HTTP error " + response.status);
             }
 
-            window.location.href("/cart");
+            window.location.href = "http://localhost:3000/cart";
 
             // Update the total after the item is removed from the cart
             updateTotal(-(price * quantity));
