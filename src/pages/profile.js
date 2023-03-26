@@ -44,7 +44,7 @@ const Profile = () => {
     if (token !== null) {
         return (
             <div className="content">
-                <div className="login-form-container profile-form">
+                <div className="profile-form">
                     <h1>Profile</h1>
                     <h4>Name:</h4>
                     <p>{token.firstName} {token.lastName}</p>
@@ -54,7 +54,7 @@ const Profile = () => {
                     <p>{token.address}</p>
                     <p>{token.zipCode} {token.city}</p>
                     <p>{token.country}</p>
-                    <button>Edit</button>
+                    <button className="profile-button">Edit</button>
                 </div>
 
             </div>
