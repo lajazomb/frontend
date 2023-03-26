@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import jwtDecode from "jwt-decode";
 import CartContainer from "../components/cart/CartContainer";
+import Loader from "../components/elements/loader";
 
 const Cart = () => {
     const [loggedIn, setLogin] = useState(false);
@@ -9,6 +10,7 @@ const Cart = () => {
     const [cartData, setCartData] = useState(null);
     const [itemPairs, setItemPairs] = useState([]);
     const [total, setTotal] = useState(0);
+    const [isLoading, setIsLoading] = useState(true);
 
     const createCheckoutSession = () => {
         const paymentBackend = process.env.REACT_APP_BACKEND_PAYMENT_API;
@@ -55,7 +57,6 @@ const Cart = () => {
             const cartBackend = process.env.REACT_APP_BACKEND_CART_API;
             const token = localStorage.getItem("jwt-token");
             const decodedToken = jwtDecode(token);
-            console.log("Getting cart for " + userId);
             const response = await fetch(cartBackend + "/api/v1/cart/user/" + decodedToken.userid, {
                 method: "GET",
                 headers: {
@@ -81,6 +82,7 @@ const Cart = () => {
         setCartData(cartData);
         const items = Object.entries(cartData.items).map(([itemId, quantity]) => ({ itemId, quantity }));
         setItemPairs(items);
+        setIsLoading(false);
     };
 
     useEffect(() => {
@@ -91,6 +93,7 @@ const Cart = () => {
         <div className="content">
             <div className="cart-container">
                 {itemPairs.length > 0 && <CartContainer itemPairs={itemPairs} userId={userId} updateTotal={updateTotal}/>}
+                {isLoading && <Loader/>}
                 <div className="cart-total-container">
                     <h3>TOTAL</h3>
                     <h3>{total/2}€</h3>
