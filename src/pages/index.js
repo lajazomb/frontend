@@ -49,7 +49,7 @@ const Home = () => {
                 </div>
 
             </div>
-            <button className="explore-button">Explore more books...</button>
+            <a href="/products"><button className="explore-button">Explore more books...</button></a>
         </div>
     );
 };
