@@ -272,5 +272,21 @@ button:active {
   border-radius: 0px;
   border: none;
 }
+
+.errorMsg {
+  color: white;
+  background-color: #b80c09;
+  padding: 10px;
+  border-radius: 3px;
+}
+
+.successMsg {
+  color: white;
+  background-color: #65B891;
+  padding: 10px;
+  border-radius: 3px;
+  width: 50%;
+  text-align: center;
+}
 /* End Details Page */
 

@@ -8,6 +8,7 @@ const Details = () => {
     const [product, setProduct] = useState({});
     const [isLoading, setIsLoading] = useState(false);
     const [errorMsg, setErrorMsg] = useState('');
+    const [successMsg, setSuccessMsg] = useState('');
     const [quantity, setQuantity] = useState(0);
     const { id } = useParams();
 
@@ -44,6 +45,11 @@ const Details = () => {
                     Authorization: `Bearer ${localStorage.getItem('jwt-token')}`,
                 },
             })
+            .then((response) => {
+                if (response.status === 200) {
+                    setSuccessMsg('Product added to cart.');
+                }
+            })
             .catch((error) => setErrorMsg('Error: product could not be added to cart.'));
     };
 
@@ -64,7 +70,6 @@ const Details = () => {
     return (
         <div className="content">
             {isLoading && <p className="loading">Loading...</p>}
-            {errorMsg && <p className="errorMsg">{errorMsg}</p>}
 
             <div className="cover-container">
                 <img src={product.cover} alt={product.title} />
@@ -90,6 +95,8 @@ const Details = () => {
                         Add to cart
                     </button>
                 </div>
+                {errorMsg && <p className="errorMsg">{errorMsg}</p>}
+                {successMsg && <p className="successMsg">{successMsg}</p>}
             </div>
         </div>
     );
