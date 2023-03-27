@@ -9,6 +9,7 @@ import Products from './pages/products';
 import jwtDecode from "jwt-decode";
 import Profile from "./pages/profile";
 import Details from "./pages/details";
+import SearchResult from "./pages/searchResult";
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
           <Route path='/profile' element={<Profile/>} />
           <Route path='/products' element={<Products/>} />
           <Route path='/products/:id' element={<Details/>} />
+          <Route path='/products/search/:query' element={<SearchResult/>} />
         </Routes>
       </Router>
   );

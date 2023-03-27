@@ -10,15 +10,32 @@ const SearchBar = () => {
         setSearchInput(e.target.value);
     };
 
-    if (searchInput.length > 0) {
-        // do the searching here
+    const search = () => {
+        if (searchInput.length > 0) {
+            window.location.href = `http://localhost:3000/products/search/${searchInput}`;
+        }
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        search();
+    }
+
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            search();
+        }
     }
 
     return <div>
         <input
+            className={"searchbar"}
             type="search"
             placeholder="Search here..."
             onChange={handleChange}
+            onKeyDown={handleKeyDown}
+            onSubmit={handleSubmit}
             value={searchInput} />
     </div>
 
