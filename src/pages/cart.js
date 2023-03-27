@@ -97,9 +97,8 @@ const Cart = () => {
                 {itemPairs.length === 0 && <h1>Your cart is empty</h1>}
                 <div className="cart-total-container">
                     <h3>TOTAL</h3>
-                    <h3>{total/2}€</h3>
+                    {!isNaN(total) && total !== 0 && <h3>{total/2}€</h3>}
                 </div>
-
                 <div className="cart-buttons-container">
                     <Link to="/">
                         <button className="cart-button-shopping">Continue Shopping</button>
