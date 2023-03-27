@@ -94,6 +94,7 @@ const Cart = () => {
             <div className="cart-container">
                 {itemPairs.length > 0 && <CartContainer itemPairs={itemPairs} userId={userId} updateTotal={updateTotal}/>}
                 {isLoading && <Loader/>}
+                {itemPairs.length === 0 && <h1>Your cart is empty</h1>}
                 <div className="cart-total-container">
                     <h3>TOTAL</h3>
                     <h3>{total/2}€</h3>

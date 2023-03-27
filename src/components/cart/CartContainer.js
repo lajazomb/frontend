@@ -29,7 +29,7 @@ const CartContainer = ({ itemPairs, userId, updateTotal }) => {
                         updateTotal={updateTotal}
                     />
                 ))}
-                {cartEmpty && <h2>Your cart is empty.</h2>}
+
             </div>
         </div>
     );

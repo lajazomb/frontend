@@ -19,6 +19,10 @@ body {
   border-bottom: 0.5px solid;
 }
 
+a, a:visited, a:hover, a:active {
+  color: inherit;
+}
+
 /* Landing Page */
 .landing-page-content {
   display: flex;
