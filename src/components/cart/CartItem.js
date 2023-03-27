@@ -23,6 +23,31 @@ const CartItem = ({ productId, quantity, userId, updateTotal }) => {
         }
     };
 
+    const handleDropdownChange = async (event) => {
+        const data = { userId, productId, quantity: event.target.value };
+
+        try {
+            const response = await fetch(process.env.REACT_APP_BACKEND_CART_API + `/api/v1/cart/update`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            });
+
+            if (!response.ok) {
+                throw new Error("HTTP error " + response.status);
+            }
+
+            window.location.href = "http://localhost:3000/cart";
+
+            // Update the total after the item quantity is changed
+            updateTotal((data.price * event.target.value) - (data.price * quantity));
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     const removeFromCart = async () => {
         const data = { userId, productId };
 
@@ -57,7 +82,7 @@ const CartItem = ({ productId, quantity, userId, updateTotal }) => {
             <div className="cart-item">
                 <div className="name-quantity">
                     <p className="product-name">{productName}</p>
-                    <select id="quantity-dropdown">
+                    <select id="quantity-dropdown" onChange={handleDropdownChange}>
                         <option value={quantity}>{quantity}</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
