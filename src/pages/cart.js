@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import {Link} from 'react-router-dom';
 import jwtDecode from "jwt-decode";
 import CartContainer from "../components/cart/CartContainer";
 import Loader from "../components/elements/loader";
@@ -14,9 +14,13 @@ const Cart = () => {
 
     const createCheckoutSession = () => {
         const paymentBackend = process.env.REACT_APP_BACKEND_PAYMENT_API;
+        console.log(getChargeEntries())
         fetch(paymentBackend + "create-checkout-session", {
+            headers: {
+                "Content-Type": "application/json",
+            },
             method: "POST",
-            body: JSON.stringify({})
+            body: getChargeEntries()
         }).then(res => {
             if (res.ok) return res.json()
             return res.json().then(json => Promise.reject(json))
@@ -27,6 +31,19 @@ const Cart = () => {
             .catch(e => {
                 console.error(e)
             })
+    }
+
+    const getChargeEntries = () => {
+        let products = "";
+        itemPairs.forEach(item => {
+            let itemMap = new Map();
+            itemMap.set("productId" , item.itemId);
+            itemMap.set("quantity" , item.quantity);
+            let obj = Object.fromEntries(itemMap);
+            let json = JSON.stringify(obj);
+            products += json + ",";
+        });
+        return '{"chargeEntries":[' + products.slice(0, -1) + "]}";
     }
 
     const updateTotal = (price) => {
