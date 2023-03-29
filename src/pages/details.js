@@ -72,7 +72,7 @@ const Details = () => {
             {isLoading && <p className="loading">Loading...</p>}
 
             <div className="cover-container">
-                <img src={product.cover} alt={product.title} />
+                <img src={product.coverUrl} alt={product.title} className="product-details-img" />
             </div>
 
             <div className="product-details-container">
@@ -81,6 +81,7 @@ const Details = () => {
                     <h1>{product.title}</h1>
                     <h2>Description</h2>
                     <p>{product.description}</p>
+                    <h3>{product.price}€</h3>
                 </div>
 
                 <div className="add-to-cart-container">

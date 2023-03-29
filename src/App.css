@@ -230,8 +230,14 @@ button:active {
 
 .product-image-container {
   width: 100%;
-  height: 200px;
-  background-color: black;
+  max-height: 470px;
+}
+
+.product-img {
+  max-width: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 
@@ -247,7 +253,7 @@ button:active {
 .cover-container > img {
   background-color: black;
   height: 70vh;
-  width: 70%;
+  border: 20px solid white;
 }
 
 .product-details-container {
@@ -375,3 +381,55 @@ button:active {
 
 /* End Search Page */
 
+.completion-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  padding-left: 5vw;
+  padding-right: 5vw;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  width: 20vw;
+  margin: auto;
+}
+
+.book-background {
+  background-image: url("https://images6.alphacoders.com/346/346199.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 75vh;
+  padding-top: 20vh;
+}
+
+.glowing-border {
+  border: 0.3px solid transparent;
+  background-clip: padding-box;
+  box-shadow: 0 0 5px rgba(0,0,0,0.5);
+  animation: glowing-border 5s linear infinite;
+}
+
+@keyframes glowing-border {
+  0% {
+    border-color: #ff6666;
+    box-shadow: 0 0 10px #ff6666;
+  }
+  25% {
+    border-color: #ffa500;
+    box-shadow: 0 0 10px #ffa500;
+  }
+  50% {
+    border-color: #ffff00;
+    box-shadow: 0 0 10px #ffff00;
+  }
+  75% {
+    border-color: #7cfc00;
+    box-shadow: 0 0 10px #7cfc00;
+  }
+  100% {
+    border-color: #00ced1;
+    box-shadow: 0 0 10px #00ced1;
+  }
+}
