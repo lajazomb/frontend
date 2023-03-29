@@ -10,6 +10,7 @@ import jwtDecode from "jwt-decode";
 import Profile from "./pages/profile";
 import Details from "./pages/details";
 import SearchResult from "./pages/searchResult";
+import Completion from "./pages/payment/completion";
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
           <Route path='/products' element={<Products/>} />
           <Route path='/products/:id' element={<Details/>} />
           <Route path='/products/search/:query' element={<SearchResult/>} />
+          <Route path='/completion' element={<Completion/>} />
         </Routes>
       </Router>
   );
