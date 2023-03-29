@@ -1,5 +1,3 @@
-// CartItem.js
-
 import React, { useEffect, useState } from "react";
 
 const CartItem = ({ productId, quantity, userId, updateTotal }) => {
@@ -84,14 +82,15 @@ const CartItem = ({ productId, quantity, userId, updateTotal }) => {
                     <p className="product-name">{productName}</p>
                     <select id="quantity-dropdown" onChange={handleDropdownChange}>
                         <option value={quantity}>{quantity}</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
+                        {quantity > 5 && [...Array(quantity)].map((_, index) => (
+                            <option key={index} value={index + 1}>{index + 1}</option>
+                        ))}
+                        {quantity <= 5 && [...Array(5)].map((_, index) => (
+                            <option key={index} value={index + 1}>{index + 1}</option>
+                        ))}
                     </select>
                 </div>
-                <p className="product-price">{price * quantity}.00€</p>
+                <p className="product-price">{price * quantity}€</p>
                 <p onClick={removeFromCart} className="product-name red-text">
                     Remove
                 </p>
