@@ -54,7 +54,6 @@ const Profile = () => {
                     <p>{token.address}</p>
                     <p>{token.zipCode} {token.city}</p>
                     <p>{token.country}</p>
-                    <button className="profile-button">Edit</button>
                 </div>
 
             </div>

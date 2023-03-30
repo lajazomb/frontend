@@ -38,20 +38,35 @@ const Details = () => {
         }
 
         const userId = decodedToken.userid;
-        const data = { userId, productId: id, quantity };
-        axios
-            .post('http://localhost:28080/api/v1/cart', data, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('jwt-token')}`,
-                },
-            })
+
+        const token = localStorage.getItem('jwt-token');
+        if (!token) {
+            setErrorMsg('Error: JWT token not found.');
+            return;
+        }
+
+        var options = {
+            method: 'POST',
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token,
+            },
+            body: JSON.stringify({ userId: userId, productId: id, quantity: quantity })
+        }
+        fetch('http://localhost:28080/api/v1/cart', options)
             .then((response) => {
-                if (response.status === 200) {
-                    setSuccessMsg('Product added to cart.');
-                }
-            })
-            .catch((error) => setErrorMsg('Error: product could not be added to cart.'));
+            if (response.ok) {
+                setSuccessMsg('Product added to cart.');
+            } else {
+                throw new Error('Error: product could not be added to cart.');
+            }
+        })
+            .catch((error) => setErrorMsg(error.message));
+
     };
+
 
     useEffect(() => {
         setIsLoading(true);

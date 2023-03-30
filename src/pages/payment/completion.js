@@ -10,7 +10,14 @@ const Completion = () => {
     }, []);
 
     const clearCart = () => {
+        const token = localStorage.getItem('jwt-token');
         fetch('http://localhost:28080/api/v1/cart/user/' + decodedJwtToken.userid, {
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token,
+            },
             method: 'DELETE',
         })
     }

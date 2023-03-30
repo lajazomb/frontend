@@ -23,14 +23,17 @@ const CartItem = ({ productId, quantity, userId, updateTotal }) => {
 
     const handleDropdownChange = async (event) => {
         const data = { userId, productId, quantity: event.target.value };
-
+        const token = localStorage.getItem('jwt-token');
         try {
             const response = await fetch(process.env.REACT_APP_BACKEND_CART_API + `/api/v1/cart/update`, {
                 method: "PUT",
                 headers: {
-                    "Content-Type": "application/json",
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token,
                 },
-                body: JSON.stringify(data),
+                body: JSON.stringify({ userId, productId, quantity: event.target.value }),
             });
 
             if (!response.ok) {
@@ -48,14 +51,18 @@ const CartItem = ({ productId, quantity, userId, updateTotal }) => {
 
     const removeFromCart = async () => {
         const data = { userId, productId };
+        const token = localStorage.getItem('jwt-token');
 
         try {
             const response = await fetch(process.env.REACT_APP_BACKEND_CART_API + `/api/v1/cart/delete`, {
                 method: "PUT",
                 headers: {
-                    "Content-Type": "application/json",
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token,
                 },
-                body: JSON.stringify(data),
+                body: JSON.stringify({ userId, productId } ),
             });
 
             if (!response.ok) {

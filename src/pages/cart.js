@@ -70,14 +70,19 @@ const Cart = () => {
     };
 
     const getCart = async () => {
+
         try {
+
             const cartBackend = process.env.REACT_APP_BACKEND_CART_API;
             const token = localStorage.getItem("jwt-token");
             const decodedToken = jwtDecode(token);
             const response = await fetch(cartBackend + "/api/v1/cart/user/" + decodedToken.userid, {
                 method: "GET",
                 headers: {
-                    "Content-Type": "application/json",
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token,
                 },
             });
 
